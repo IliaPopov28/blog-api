@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_DSN=host=db user=postgres password=postgres dbname=blog_api_db port=5434 sslmode=disable
+      - JWT_SECRET=your_super_secret_jwt_key_change_in_production
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_DB=blog_api_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5434:5434"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data: 

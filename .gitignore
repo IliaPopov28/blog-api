@@ -2,3 +2,4 @@
 controllers/post.go~
 .idea/
 *.iml
+.dockerignore
