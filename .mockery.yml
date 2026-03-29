@@ -1,0 +1,12 @@
+all: false
+generate: true
+template: testify
+dir: mocks
+filename: '{{.InterfaceName}}Mock.go'
+pkgname: mocks
+
+packages:
+  blog-api/internal/service:
+    interfaces:
+      UserRepositoryInterface: {}
+      PostRepositoryInterface: {}
